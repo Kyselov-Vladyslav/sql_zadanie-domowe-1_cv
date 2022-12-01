@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 30 Lis 2022, 21:29
+-- Czas generowania: 01 Gru 2022, 20:49
 -- Wersja serwera: 10.4.24-MariaDB
 -- Wersja PHP: 8.1.6
 
@@ -40,8 +40,7 @@ INSERT INTO `cv_courses` (`id_ courses`, `courses`) VALUES
 (1, 'Web-Coders.pl Kursy programowania, Szkoła programowania w Krakowie'),
 (2, 'Certyfikowane kursy księgowości - Warszawa'),
 (3, 'Kursy księgowości Akademia Biznesu'),
-(4, 'Kursy online ABC'),
-(5, 'brak');
+(4, 'Kursy online ABC');
 
 -- --------------------------------------------------------
 
@@ -64,8 +63,7 @@ INSERT INTO `cv_experience` (`id_ experience`, `experience`) VALUES
 (3, 'FIRMA C'),
 (4, 'FIRMA Z'),
 (5, 'FIRMA X'),
-(6, 'FIRMA V'),
-(7, 'brak');
+(6, 'FIRMA V');
 
 -- --------------------------------------------------------
 
@@ -88,8 +86,7 @@ INSERT INTO `cv_school` (`id_ school`, `school`) VALUES
 (3, 'Szkoła Stowarzyszenia Polsko Kanaryjskiego ARKA'),
 (4, 'Gimnazjum im. św. Rafała Kalinowskiego w Niemieżu'),
 (5, 'Boratyński Liceum'),
-(6, 'Polska Szkola w Charlotte'),
-(7, 'brak');
+(6, 'Polska Szkola w Charlotte');
 
 -- --------------------------------------------------------
 
@@ -114,8 +111,7 @@ INSERT INTO `cv_universities` (`id_universities`, `universities`) VALUES
 (5, 'Uniwersytet Marii Curie-Skłodowskiej w Lublinie'),
 (6, 'Uniwersytet Łódzki'),
 (7, 'Uniwersytet Mikołaja Kopernika w Toruniu'),
-(8, 'Uniwersytet Śląski w Katowicach'),
-(9, 'brak');
+(8, 'Uniwersytet Śląski w Katowicach');
 
 -- --------------------------------------------------------
 
@@ -131,29 +127,106 @@ CREATE TABLE `cv_users` (
   `id_phonecode` int(11) NOT NULL,
   `telephone` int(9) NOT NULL,
   `email` varchar(80) COLLATE utf8mb4_polish_ci NOT NULL,
-  `picture` varchar(60) COLLATE utf8mb4_polish_ci NOT NULL,
-  `id_school` int(11) NOT NULL,
-  `date_start_school` date NOT NULL,
-  `date_end_school` date NOT NULL,
-  `id_universities` int(11) NOT NULL,
-  `date_start_universities` date NOT NULL,
-  `date_end_universities` date NOT NULL,
-  `id_courses` int(11) NOT NULL,
-  `date_start_courses` date NOT NULL,
-  `date_end_courses` date NOT NULL,
-  `id_experience` int(11) NOT NULL,
-  `date_start_experience` date NOT NULL,
-  `date_end_experience` date NOT NULL
+  `picture` varchar(60) COLLATE utf8mb4_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
 
 --
 -- Zrzut danych tabeli `cv_users`
 --
 
-INSERT INTO `cv_users` (`id_cv`, `id_user`, `firstname`, `surename`, `id_phonecode`, `telephone`, `email`, `picture`, `id_school`, `date_start_school`, `date_end_school`, `id_universities`, `date_start_universities`, `date_end_universities`, `id_courses`, `date_start_courses`, `date_end_courses`, `id_experience`, `date_start_experience`, `date_end_experience`) VALUES
-(3, 1, 'Anna', 'Nowak', 1, 111222333, 'anowak@mail.pl', 'nowak1.jpg', 3, '1997-11-01', '2004-11-01', 4, '2012-11-01', '2015-11-12', 2, '2016-12-01', '2017-01-31', 6, '2021-10-05', '2022-11-02'),
-(4, 2, 'Jan', 'Nowak', 3, 444555666, 'jn@ma.pl', 'jan2.png', 2, '2002-11-08', '2005-04-13', 6, '2007-05-05', '2009-06-01', 1, '2021-05-01', '2022-06-04', 1, '2016-02-02', '2020-03-03'),
-(5, 3, 'Paweł', 'Kowalski', 1, 789456123, 'pk@paw.pl', 'kowalski.gif', 5, '1998-09-01', '2005-06-01', 9, '0000-00-00', '0000-00-00', 4, '2020-05-06', '2021-07-08', 7, '0000-00-00', '0000-00-00');
+INSERT INTO `cv_users` (`id_cv`, `id_user`, `firstname`, `surename`, `id_phonecode`, `telephone`, `email`, `picture`) VALUES
+(1, 1, 'Anna', 'Nowak', 1, 777888999, 'anna.nowak@nowak.pl', 'nowak1.jpg'),
+(2, 2, 'Jan', 'Nowak', 3, 555444666, 'jan.nowak@janow.pl', 'jan2.png'),
+(3, 3, 'Paweł', 'Kowalski', 2, 789456123, 'kowalski123@qwe.ua', 'pk.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `cv_users_courses`
+--
+
+CREATE TABLE `cv_users_courses` (
+  `id_user` int(11) NOT NULL,
+  `cv_courses` int(11) NOT NULL,
+  `date_start_courses` date NOT NULL,
+  `date_end_courses` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `cv_users_courses`
+--
+
+INSERT INTO `cv_users_courses` (`id_user`, `cv_courses`, `date_start_courses`, `date_end_courses`) VALUES
+(1, 3, '2016-12-01', '2017-01-31'),
+(1, 4, '2021-05-01', '2022-06-04'),
+(3, 1, '2020-05-06', '2021-07-08');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `cv_users_experience`
+--
+
+CREATE TABLE `cv_users_experience` (
+  `id_user` int(11) NOT NULL,
+  `id_experience` int(11) NOT NULL,
+  `date_start_experience` date NOT NULL,
+  `date_end_experience` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `cv_users_experience`
+--
+
+INSERT INTO `cv_users_experience` (`id_user`, `id_experience`, `date_start_experience`, `date_end_experience`) VALUES
+(1, 1, '2021-10-05', '2022-11-02'),
+(1, 2, '2017-05-06', '2021-06-05'),
+(2, 5, '2005-10-15', '2008-01-02'),
+(3, 4, '2015-08-06', '2017-09-15'),
+(3, 6, '2018-12-05', '2020-10-12');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `cv_users_school`
+--
+
+CREATE TABLE `cv_users_school` (
+  `id_user` int(11) NOT NULL,
+  `id_school` int(11) NOT NULL,
+  `date_start_school` date NOT NULL,
+  `date_end_school` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `cv_users_school`
+--
+
+INSERT INTO `cv_users_school` (`id_user`, `id_school`, `date_start_school`, `date_end_school`) VALUES
+(1, 6, '1997-11-01', '2004-11-01'),
+(2, 6, '1998-11-08', '2003-04-13'),
+(3, 2, '1990-05-05', '1998-06-07');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `cv_users_universities`
+--
+
+CREATE TABLE `cv_users_universities` (
+  `id_user` int(11) NOT NULL,
+  `id_universities` int(11) NOT NULL,
+  `date_start_universities` date NOT NULL,
+  `date_end_universities` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_polish_ci;
+
+--
+-- Zrzut danych tabeli `cv_users_universities`
+--
+
+INSERT INTO `cv_users_universities` (`id_user`, `id_universities`, `date_start_universities`, `date_end_universities`) VALUES
+(1, 3, '2012-11-01', '2015-11-12'),
+(1, 2, '2018-10-01', '2020-10-23');
 
 -- --------------------------------------------------------
 
@@ -232,11 +305,35 @@ ALTER TABLE `cv_universities`
 ALTER TABLE `cv_users`
   ADD PRIMARY KEY (`id_cv`),
   ADD KEY `id_user` (`id_user`),
-  ADD KEY `id_phonecode` (`id_phonecode`),
+  ADD KEY `id_phonecode` (`id_phonecode`);
+
+--
+-- Indeksy dla tabeli `cv_users_courses`
+--
+ALTER TABLE `cv_users_courses`
+  ADD KEY `cv_courses` (`cv_courses`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeksy dla tabeli `cv_users_experience`
+--
+ALTER TABLE `cv_users_experience`
+  ADD KEY `id_experience` (`id_experience`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeksy dla tabeli `cv_users_school`
+--
+ALTER TABLE `cv_users_school`
   ADD KEY `id_school` (`id_school`),
+  ADD KEY `id_user` (`id_user`);
+
+--
+-- Indeksy dla tabeli `cv_users_universities`
+--
+ALTER TABLE `cv_users_universities`
   ADD KEY `id_universities` (`id_universities`),
-  ADD KEY `id_courses` (`id_courses`),
-  ADD KEY `id_experience` (`id_experience`);
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indeksy dla tabeli `phone_code`
@@ -282,7 +379,7 @@ ALTER TABLE `cv_universities`
 -- AUTO_INCREMENT dla tabeli `cv_users`
 --
 ALTER TABLE `cv_users`
-  MODIFY `id_cv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `phone_code`
@@ -305,11 +402,35 @@ ALTER TABLE `users`
 --
 ALTER TABLE `cv_users`
   ADD CONSTRAINT `cv_users_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`),
-  ADD CONSTRAINT `cv_users_ibfk_2` FOREIGN KEY (`id_phonecode`) REFERENCES `phone_code` (`id_phonecode`),
-  ADD CONSTRAINT `cv_users_ibfk_3` FOREIGN KEY (`id_experience`) REFERENCES `cv_experience` (`id_ experience`),
-  ADD CONSTRAINT `cv_users_ibfk_4` FOREIGN KEY (`id_school`) REFERENCES `cv_school` (`id_ school`),
-  ADD CONSTRAINT `cv_users_ibfk_5` FOREIGN KEY (`id_universities`) REFERENCES `cv_universities` (`id_universities`),
-  ADD CONSTRAINT `cv_users_ibfk_6` FOREIGN KEY (`id_courses`) REFERENCES `cv_courses` (`id_ courses`);
+  ADD CONSTRAINT `cv_users_ibfk_2` FOREIGN KEY (`id_phonecode`) REFERENCES `phone_code` (`id_phonecode`);
+
+--
+-- Ograniczenia dla tabeli `cv_users_courses`
+--
+ALTER TABLE `cv_users_courses`
+  ADD CONSTRAINT `cv_users_courses_ibfk_2` FOREIGN KEY (`cv_courses`) REFERENCES `cv_courses` (`id_ courses`),
+  ADD CONSTRAINT `cv_users_courses_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `cv_users_experience`
+--
+ALTER TABLE `cv_users_experience`
+  ADD CONSTRAINT `cv_users_experience_ibfk_2` FOREIGN KEY (`id_experience`) REFERENCES `cv_experience` (`id_ experience`),
+  ADD CONSTRAINT `cv_users_experience_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `cv_users_school`
+--
+ALTER TABLE `cv_users_school`
+  ADD CONSTRAINT `cv_users_school_ibfk_1` FOREIGN KEY (`id_school`) REFERENCES `cv_school` (`id_ school`),
+  ADD CONSTRAINT `cv_users_school_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
+
+--
+-- Ograniczenia dla tabeli `cv_users_universities`
+--
+ALTER TABLE `cv_users_universities`
+  ADD CONSTRAINT `cv_users_universities_ibfk_2` FOREIGN KEY (`id_universities`) REFERENCES `cv_universities` (`id_universities`),
+  ADD CONSTRAINT `cv_users_universities_ibfk_3` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
